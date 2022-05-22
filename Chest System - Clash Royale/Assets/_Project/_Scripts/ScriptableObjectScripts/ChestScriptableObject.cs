@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName ="Chest Scriptable Object", menuName = "ScriptableObjects/Create New Chest Scriptable Object")]
+[CreateAssetMenu(fileName ="Chest Scriptable Object", menuName = "ScriptableObjects/Chests/Create New Chest Scriptable Object")]
 public class ChestScriptableObject : ScriptableObject
 {
     public string ChestName;
