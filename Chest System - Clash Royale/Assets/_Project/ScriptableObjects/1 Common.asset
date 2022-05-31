@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: 1 Common
   m_EditorClassIdentifier: 
   ChestName: Common Chest
+  ChestTypeName: Common
   ChestSprite: {fileID: 21300000, guid: d17fb2fa8ac046547a0fb87adce523de, type: 3}
   MinCoins: 100
   MaxCoins: 200
   MinGems: 10
   MaxGems: 20
-  UnlockTimer: 15
+  UnlockTimer: 5

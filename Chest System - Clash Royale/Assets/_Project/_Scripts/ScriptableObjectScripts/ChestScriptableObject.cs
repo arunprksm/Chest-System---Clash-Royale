@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChestScriptableObject : ScriptableObject
 {
     public string ChestName;
+    public string ChestTypeName;
     public Sprite ChestSprite;
     public int MinCoins;
     public int MaxCoins;
