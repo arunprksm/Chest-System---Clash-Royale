@@ -10,8 +10,8 @@ public class CurrencyManager : SingletonGenerics<CurrencyManager>
 
     private void Start()
     {
-        coins = 200;
-        gems = 50;
+        coins = 100;
+        gems = 100;
         ChestSystemManager.Instance.UpdateGemsUI(gems);
         ChestSystemManager.Instance.UpdateCoinsUI(coins);
     }

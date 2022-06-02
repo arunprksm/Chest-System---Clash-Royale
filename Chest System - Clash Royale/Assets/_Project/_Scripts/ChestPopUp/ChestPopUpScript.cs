@@ -17,7 +17,7 @@ public class ChestPopUpScript : SingletonGenerics<ChestPopUpScript>
     public void SetChestPopUpValues(ChestModel _chestModel)
     {
         ChestPopUp_Heading.text = _chestModel.ChestName;
-
+        ChestPopUp_CoinValue.text = _chestModel.ChestPopUp_CoinValue;
+        ChestPopUp_GemValue.text = _chestModel.ChestPopUp_GemValue;
     }
-
 }

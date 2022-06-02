@@ -19,19 +19,19 @@ public class ChestService : SingletonGenerics<ChestService>
         ChestSystemManager.Instance.ChestSlots.SetActive(true);
     }
 
-    public ChestController GetChest(ChestScriptableObject randomChestSO, ChestView chestView)
+    public ChestController GetChest(ChestScriptableObject ChestScriptableObject, ChestView chestView)
     {
-        ChestModel chestModel = new ChestModel(randomChestSO);
+        ChestModel chestModel = new ChestModel(ChestScriptableObject);
         ChestController chestController = new ChestController(chestView, chestModel);
         return chestController;
     }
 
-    public void OnClickStartTimerWithCoins()
+    public void OnClickStartTimer()
     {
         selectedController.EnteringUnlockingState();
         ChestSystemManager.Instance.ToggleUnlockChestPopup();
     }
-        
+
     public void EnableRewardsPopup(bool setActive)
     {
         if (!setActive)

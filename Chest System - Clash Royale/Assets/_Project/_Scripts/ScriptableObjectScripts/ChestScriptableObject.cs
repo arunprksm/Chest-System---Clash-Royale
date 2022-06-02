@@ -11,8 +11,7 @@ public class ChestScriptableObject : ScriptableObject
     public int MaxCoins;
     public int MinGems;
     public int MaxGems;
+    public string ChestPopUp_CoinValue;
+    public string ChestPopUp_GemValue;
     public float UnlockTimer;
-    
-    //public float UnlockedTimer;
-    //public float LockTimer;
 }

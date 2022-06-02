@@ -13,6 +13,8 @@ public class ChestModel
     public int MaxGems { get; }
     public float UnlockTimer { get; }
 
+    public string ChestPopUp_CoinValue { get; }
+    public string ChestPopUp_GemValue { get; }
     public int CoinCost { get; }
     public int CoinsReward { get; }
     public int GemCost { get; }
@@ -26,6 +28,8 @@ public class ChestModel
         MaxCoins = chestScriptableObject.MaxCoins;
         MinGems = chestScriptableObject.MinGems;
         MaxGems = chestScriptableObject.MaxGems;
+        ChestPopUp_CoinValue = chestScriptableObject.ChestPopUp_CoinValue;
+        ChestPopUp_GemValue = chestScriptableObject.ChestPopUp_GemValue;
         UnlockTimer = chestScriptableObject.UnlockTimer;
         CoinsReward = Random.Range(chestScriptableObject.MinCoins, chestScriptableObject.MaxCoins + 1);
         GemsReward = Random.Range(chestScriptableObject.MinGems, chestScriptableObject.MaxGems + 1);

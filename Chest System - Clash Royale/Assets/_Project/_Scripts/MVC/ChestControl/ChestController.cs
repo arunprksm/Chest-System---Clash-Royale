@@ -11,16 +11,13 @@ public class ChestController
     public float timerValue;
     public float unlockTimer = 0;
 
-    public ChestController (ChestView chestView, ChestModel chestModel)
+    public ChestController(ChestView chestView, ChestModel chestModel)
     {
         ChestView = chestView;
         ChestModel = chestModel;
         ChestView.ChestController = this;
-        Timer.Instance.ChestView = chestView;
-        ChestService.Instance.selectedController = this;
         InitializeLockedChestFunction();
         unlockTimer = ChestModel.UnlockTimer;
-        Timer.Instance.timeValue = ChestModel.UnlockTimer;
     }
 
     public void InitializeLockedChestFunction()
@@ -49,8 +46,10 @@ public class ChestController
     }
     public void ChestButtonClickController()
     {
+
         if (ChestView.currentState == ChestState.Locked)
         {
+            ChestService.Instance.selectedController = this;
             ChestSystemManager.Instance.SpwanChestButton.SetActive(false);
             ChestSystemManager.Instance.ChestSlots.SetActive(false);
             ChestSystemManager.Instance.ChestPopUp.SetActive(true);
@@ -82,8 +81,9 @@ public class ChestController
     {
         SlotManager.Instance.isUnlocking = false;
         InitializeUnLockedChestFunction();
-        ChestView.TimerText.text = "OPEN!";
+        ChestView.TimerText.text = "OPEN CHEST!";
     }
+
     public async void TimerStartFunction()
     {
         TimeSpan Ts = TimeSpan.FromSeconds(unlockTimer);
@@ -91,8 +91,8 @@ public class ChestController
         await Task.Delay(Ts);
         EnteringUnlockedState();
         Debug.Log("Timer Works");
-
     }
+
     public void OpenChest()
     {
         ChestView.InitializeEmptyChestFunction();
@@ -100,8 +100,7 @@ public class ChestController
         ChestView.slotView.chestIsEmpty = true;
         ChestView.slotView.chestController = null;
     }
-   
-    
+
     public void ReceiveChestRewards()
     {
         CurrencyManager.Instance.IncreaseCoins(ChestModel.CoinsReward);
@@ -113,22 +112,22 @@ public class ChestController
         return (int)Mathf.Ceil(unlockTimer / 2);
     }
 }
-    //public async void StartTimer()
-    //{
+//public async void StartTimer()
+//{
 
-    //if (unlockTimer > 0)
-    //    {
-    //        unlockTimer -= Time.deltaTime;
-    //        Debug.Log(unlockTimer);
-    //        ChestView.TimerText.text = unlockTimer.ToString();
-    //    }
-        //unlockTimer = 0;
-    //    while (unlockTimer > 0)
-    //    {
-    //        ChestView.TimerText.text = unlockTimer.ToString() + " s";
-    //        //await new WaitForSeconds(1f);
-    //        unlockTimer -= 1;
-    //    }
-    //    EnteringUnlockedState();
-    //    return;
-    //}
+//if (unlockTimer > 0)
+//    {
+//        unlockTimer -= Time.deltaTime;
+//        Debug.Log(unlockTimer);
+//        ChestView.TimerText.text = unlockTimer.ToString();
+//    }
+//unlockTimer = 0;
+//    while (unlockTimer > 0)
+//    {
+//        ChestView.TimerText.text = unlockTimer.ToString() + " s";
+//        //await new WaitForSeconds(1f);
+//        unlockTimer -= 1;
+//    }
+//    EnteringUnlockedState();
+//    return;
+//}

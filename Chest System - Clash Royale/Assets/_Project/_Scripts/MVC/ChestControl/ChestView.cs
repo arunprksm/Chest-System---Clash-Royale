@@ -26,7 +26,7 @@ public class ChestView : MonoBehaviour
     }
     private void Update()
     {
-        //ChestController.TimerUpdate();
+       
     }
     public void InitializeEmptyChestFunction()
     {
@@ -38,10 +38,5 @@ public class ChestView : MonoBehaviour
     public void ChestButtonClick()
     {
         ChestController.ChestButtonClickController();
-    }
-
-    public void ReceiveChestRewards()
-    {
-
     }
 }
