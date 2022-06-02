@@ -7108,7 +7108,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 512435303}
         m_TargetAssemblyTypeName: ChestService, Assembly-CSharp
-        m_MethodName: OnClickStartTimerWithCoins
+        m_MethodName: OnClickStartTimer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
