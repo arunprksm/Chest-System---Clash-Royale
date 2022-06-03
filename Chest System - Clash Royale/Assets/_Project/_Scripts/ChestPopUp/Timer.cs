@@ -1,34 +1,59 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Timer : SingletonGenerics<Timer>
 {
+    private float secondsLeft;
+    public float timeToWait = 10000f;
     public Button chestButton;
+    public TextMeshProUGUI chestTimer;
+
     private ulong lastChestOpen;
     private void Start()
     {
-        PlayerPrefs.DeleteAll();
-        chestButton.interactable = true;
-
-        //if (lastChestOpen != 0)
-        //lastChestOpen = ulong.Parse(PlayerPrefs.GetString("LastChestOpen"));
-
+        //CheckChestLastOpen();
+        chestTimer = GetComponentInChildren<TextMeshProUGUI>();
+        lastChestOpen = ulong.Parse(PlayerPrefs.GetString("LastChestOpen"));
+        if (!IsChestReady())
+        {
+            chestButton.interactable = false;
+        }
     }
+
+    private void CheckChestLastOpen()
+    {
+        PlayerPrefs.SetString("LastChestOpen", lastChestOpen.ToString());
+        if (lastChestOpen == 0)
+        {
+            lastChestOpen = (ulong)DateTime.Now.Ticks;
+        }
+    }
+
     private void Update()
     {
+        //Debug.Log("Last Chest Open " + lastChestOpen);
         if (!chestButton.IsInteractable())
         {
-            ulong diff = ((ulong)DateTime.Now.Ticks - lastChestOpen);
-            ulong m = (ulong)diff / TimeSpan.TicksPerMillisecond;
+            if (IsChestReady())
+            {
+                chestButton.interactable = true;
+                return;
+            }
+            //set The Timer
 
-            //float secondsLeft = (float)(3000 - m) / 1000;
-            //if (secondsLeft < 0)
-            //{
+            string r = "";
+            //Hours
+            r += ((int)GetTimerCount() / 3600).ToString("00") + "h ";
+            secondsLeft -= ((int)GetTimerCount() / 3600) * 3600;
+            //Minutes
+            r += ((int)GetTimerCount() / 60).ToString("00") + "m ";
+            //Seconds
+            r += ((int)GetTimerCount() % 60).ToString("00") + "s";
 
-            //}
+            chestTimer.text = r;
+
         }
     }
 
@@ -37,5 +62,38 @@ public class Timer : SingletonGenerics<Timer>
         lastChestOpen = (ulong)DateTime.Now.Ticks;
         PlayerPrefs.SetString("LastChestOpen", lastChestOpen.ToString());
         chestButton.interactable = false;
+    }
+    private bool IsChestReady()
+    {
+        //ulong diff = ((ulong)DateTime.Now.Ticks - lastChestOpen);
+        //ulong m = (ulong)diff / TimeSpan.TicksPerMillisecond;
+        //float secondsLeft = (float)(timeToWait - m) / 1000.0f;
+
+        //if (secondsLeft < 0)
+        if (GetTimerCount() < 0)
+        {
+            chestTimer.text = "Start Timer";
+            return true;
+        }
+        return false;
+    }
+
+    private float GetTimerCount()
+    {
+        ulong diff = ((ulong)DateTime.Now.Ticks - lastChestOpen);
+        ulong m = (ulong)diff / TimeSpan.TicksPerMillisecond;
+        secondsLeft = (float)(timeToWait - m) / 1000.0f;
+        return secondsLeft;
+    }
+
+    //public void SetTimerCount(float _secondsLeft)
+    //{
+    //    secondsLeft = _secondsLeft;
+    //}
+
+    public void ClickDeleteSave()
+    {
+        PlayerPrefs.DeleteAll();
+        lastChestOpen = (ulong)DateTime.Now.Ticks;
     }
 }
