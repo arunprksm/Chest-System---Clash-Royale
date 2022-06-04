@@ -43,16 +43,20 @@ public class Timer : SingletonGenerics<Timer>
             }
             //set The Timer
 
-            string r = "";
-            //Hours
-            r += ((int)GetTimerCount() / 3600).ToString("00") + "h ";
-            secondsLeft -= ((int)GetTimerCount() / 3600) * 3600;
-            //Minutes
-            r += ((int)GetTimerCount() / 60).ToString("00") + "m ";
-            //Seconds
-            r += ((int)GetTimerCount() % 60).ToString("00") + "s";
+            float minutes = Mathf.FloorToInt((int)GetTimerCount() / 60);
+            float seconds = Mathf.FloorToInt((int)GetTimerCount() % 60);
 
-            chestTimer.text = r;
+            chestTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            //string r = "";
+            ////Hours
+            //r += ((int)GetTimerCount() / 3600).ToString("00") + "h ";
+            //secondsLeft -= ((int)GetTimerCount() / 3600) * 3600;
+            ////Minutes
+            //r += ((int)GetTimerCount() / 60).ToString("00") + "m ";
+            ////Seconds
+            //r += ((int)GetTimerCount() % 60).ToString("00") + "s";
+
+            //chestTimer.text = r;
 
         }
     }

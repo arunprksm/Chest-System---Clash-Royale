@@ -6965,7 +6965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef1c2eaef322014418541f3bfe59f5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToWait: 360000
+  timeToWait: 5000
   chestButton: {fileID: 1616199754}
   chestTimer: {fileID: 0}
 --- !u!1 &1641957918
