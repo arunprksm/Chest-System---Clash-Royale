@@ -6,12 +6,16 @@ using UnityEngine;
 public class ChestService : SingletonGenerics<ChestService>
 {
     public ChestController selectedController;
+    //public float unlockTimer;
 
     private void Start()
     {
         InitializeOnStart();
     }
-
+    private void Update()
+    {
+        
+    }
     private void InitializeOnStart()
     {
         ChestSystemManager.Instance.ChestPopUp.SetActive(false);
@@ -29,9 +33,26 @@ public class ChestService : SingletonGenerics<ChestService>
     public void OnClickStartTimer()
     {
         selectedController.EnteringUnlockingState();
-        ChestSystemManager.Instance.ToggleUnlockChestPopup();
+        ChestSystemManager.Instance.CloseUnlockChestPopup();
     }
 
+    public void UseGemsButton()
+    {
+        if(CurrencyManager.Instance.gems > selectedController.GetGemCost())
+        {
+            CurrencyManager.Instance.DecreaseGems(valueToDecrease: selectedController.GetGemCost());
+            OpenNowButton();
+        }
+        else if(CurrencyManager.Instance.gems < selectedController.GetGemCost())
+        {
+            Debug.Log("Gem Is Not Enough");
+        }
+    }
+    public void OpenNowButton()
+    {
+        selectedController.EnteringUnlockedState();
+        ChestSystemManager.Instance.CloseButton();
+    }
     public void EnableRewardsPopup(bool setActive)
     {
         if (!setActive)
@@ -42,6 +63,6 @@ public class ChestService : SingletonGenerics<ChestService>
         {
             //ChestSystemManager.Instance.rewardReceivedText.text = "You received " + selectedController.ChestModel.CoinsReward + " coins and " + selectedController.ChestModel.GemsReward + " gems.";
         }
-        ChestSystemManager.Instance.rewardPopup.SetActive(setActive);
+        //ChestSystemManager.Instance.rewardPopup.SetActive(setActive);
     }
 }

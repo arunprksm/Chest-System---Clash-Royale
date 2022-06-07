@@ -22,14 +22,14 @@ public class Timer : SingletonGenerics<Timer>
         }
     }
 
-    private void CheckChestLastOpen()
-    {
-        PlayerPrefs.SetString("LastChestOpen", lastChestOpen.ToString());
-        if (lastChestOpen == 0)
-        {
-            lastChestOpen = (ulong)DateTime.Now.Ticks;
-        }
-    }
+    //private void CheckChestLastOpen()
+    //{
+    //    PlayerPrefs.SetString("LastChestOpen", lastChestOpen.ToString());
+    //    if (lastChestOpen == 0)
+    //    {
+    //        lastChestOpen = (ulong)DateTime.Now.Ticks;
+    //    }
+    //}
 
     private void Update()
     {

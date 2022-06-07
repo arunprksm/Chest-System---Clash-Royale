@@ -9,15 +9,13 @@ public class ChestController
     public ChestView ChestView { get; }
     public ChestModel ChestModel { get; }
     public float timerValue;
-    public float unlockTimer = 0;
-
     public ChestController(ChestView chestView, ChestModel chestModel)
     {
         ChestView = chestView;
         ChestModel = chestModel;
         ChestView.ChestController = this;
         InitializeLockedChestFunction();
-        unlockTimer = ChestModel.UnlockTimer;
+        ChestView.unlockTimer = ChestModel.UnlockTimer;
     }
 
     public void InitializeLockedChestFunction()
@@ -51,46 +49,61 @@ public class ChestController
         {
             ChestService.Instance.selectedController = this;
             ChestSystemManager.Instance.SpwanChestButton.SetActive(false);
+            //ChestPopUpScript.Instance.SetChestPopUpValues(ChestModel, ChestView);
             ChestSystemManager.Instance.ChestSlots.SetActive(false);
             ChestSystemManager.Instance.ChestPopUp.SetActive(true);
-            ChestPopUpScript.Instance.SetChestPopUpValues(ChestModel);
+            ChestPopUpScript.Instance.SetChestPopUpValues(ChestModel, ChestView);
         }
         else if (ChestView.currentState == ChestState.Unlocking)
         {
-            //--------------------------------------
-            //--------------------------------------
-            //--------------------------------------
+            ChestService.Instance.selectedController = this;
+            ChestSystemManager.Instance.OpenUnlockChestPopupUnlocking();
+            ChestPopUpScript.Instance.SetChestPopUpValues(ChestModel, ChestView);
         }
         else if (ChestView.currentState == ChestState.Unlocked)
         {
             //--------------------------------------
             //--------------------------------------
             //--------------------------------------
-
+            ChestService.Instance.selectedController = this;
             OpenChest();
         }
     }
 
     public void EnteringUnlockingState()
     {
+        ChestView.TimerRunning = true;
         SlotManager.Instance.isUnlocking = true;
         InitializeUnLockingChestFunction();
         TimerStartFunction();
     }
     public void EnteringUnlockedState()
     {
+        ChestView.TimerRunning = false;
+        ChestView.unlockTimer = 0f;
         SlotManager.Instance.isUnlocking = false;
         InitializeUnLockedChestFunction();
         ChestView.TimerText.text = "OPEN CHEST!";
     }
-
+    public void TimerCountFunction()
+    {
+        ChestView.unlockTimer -= Time.deltaTime;
+        float minutes = Mathf.FloorToInt((int)ChestView.unlockTimer / 60);
+        float seconds = Mathf.FloorToInt((int)ChestView.unlockTimer % 60);
+        ChestView.TimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        //ChestPopUpScript.Instance.ChestPopUpUnlocking_TimerText.text = ChestView.TimerText.text;
+        //ChestView.IsTimerRunning = PlayerPrefs.GetFloat("Timer", ChestView.unlockTimer);
+    }
     public async void TimerStartFunction()
     {
-        TimeSpan Ts = TimeSpan.FromSeconds(unlockTimer);
-        ChestView.TimerText.text = Ts.ToString();
+        TimeSpan Ts = TimeSpan.FromSeconds(ChestView.unlockTimer);
+        //ChestView.TimerText.text = Ts.ToString();
         await Task.Delay(Ts);
-        EnteringUnlockedState();
-        Debug.Log("Timer Works");
+        if (ChestView.currentState == ChestState.Unlocking)
+        {
+            EnteringUnlockedState();
+        }
+        //Debug.Log("Timer Works");
     }
 
     public void OpenChest()
@@ -108,26 +121,7 @@ public class ChestController
     }
     public int GetGemCost()
     {
-        unlockTimer = ChestModel.UnlockTimer;
-        return (int)Mathf.Ceil(unlockTimer / 2);
+        //ChestView.unlockTimer = ChestModel.UnlockTimer;
+        return (int)Mathf.Ceil(ChestView.unlockTimer / 2);
     }
 }
-//public async void StartTimer()
-//{
-
-//if (unlockTimer > 0)
-//    {
-//        unlockTimer -= Time.deltaTime;
-//        Debug.Log(unlockTimer);
-//        ChestView.TimerText.text = unlockTimer.ToString();
-//    }
-//unlockTimer = 0;
-//    while (unlockTimer > 0)
-//    {
-//        ChestView.TimerText.text = unlockTimer.ToString() + " s";
-//        //await new WaitForSeconds(1f);
-//        unlockTimer -= 1;
-//    }
-//    EnteringUnlockedState();
-//    return;
-//}
