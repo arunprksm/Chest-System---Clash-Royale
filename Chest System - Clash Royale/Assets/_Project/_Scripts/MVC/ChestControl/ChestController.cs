@@ -72,6 +72,7 @@ public class ChestController
 
     public void EnteringUnlockingState()
     {
+        ChestView.unlockTimer = ChestModel.UnlockTimer;
         ChestView.TimerRunning = true;
         SlotManager.Instance.isUnlocking = true;
         InitializeUnLockingChestFunction();
@@ -79,10 +80,10 @@ public class ChestController
     }
     public void EnteringUnlockedState()
     {
-        ChestView.TimerRunning = false;
-        ChestView.unlockTimer = 0f;
-        SlotManager.Instance.isUnlocking = false;
         InitializeUnLockedChestFunction();
+        ChestView.unlockTimer = 0f;
+        ChestView.TimerRunning = false;
+        SlotManager.Instance.isUnlocking = false;
         ChestView.TimerText.text = "OPEN CHEST!";
     }
     public void TimerCountFunction()
