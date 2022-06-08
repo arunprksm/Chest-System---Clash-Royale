@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 2 Rare
   m_EditorClassIdentifier: 
   ChestName: Rare Chest
+  ChestSprite: {fileID: 21300000, guid: 957fd6b449a69a140b0dd686c4f3c112, type: 3}
   MinCoins: 300
   MaxCoins: 500
   MinGems: 20
