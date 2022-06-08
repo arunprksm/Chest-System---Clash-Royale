@@ -21,4 +21,4 @@ MonoBehaviour:
   MaxGems: 100
   ChestPopUp_CoinValue: 1000 ~ 1200
   ChestPopUp_GemValue: 80 ~ 100
-  UnlockTimer: 8
+  UnlockTimer: 400

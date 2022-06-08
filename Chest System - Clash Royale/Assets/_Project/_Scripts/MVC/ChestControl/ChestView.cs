@@ -14,19 +14,32 @@ public class ChestView : MonoBehaviour
     public Button FillChestButton;
     public TextMeshProUGUI ChestTypeName;
     public TextMeshProUGUI TimerText;
+    internal bool TimerRunning;
+    public float IsTimerRunning;
+    public float unlockTimer;
 
     internal ChestState currentState;
 
     public SlotView slotView;
 
-
+    private void Awake()
+    {
+        //IsTimerRunning = PlayerPrefs.GetFloat("Timer", unlockTimer);
+        //if (IsTimerRunning != 0)
+        //{
+        //    ChestController.InitializeUnLockingChestFunction();
+        //}
+    }
     private void Start()
     {
         InitializeEmptyChestFunction();
     }
     private void Update()
     {
-       
+        if (TimerRunning)
+        {
+            ChestController.TimerCountFunction();
+        }
     }
     public void InitializeEmptyChestFunction()
     {
