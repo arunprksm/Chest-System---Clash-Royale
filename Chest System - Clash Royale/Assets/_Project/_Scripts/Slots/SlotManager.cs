@@ -6,6 +6,7 @@ public class SlotManager : SingletonGenerics<SlotManager>
 {
     [SerializeField] private SlotView[] Slots;
     [SerializeField] private ChestScriptableObjectLists ChestScriptableObjectLists;
+    public bool isUnlocking;
 
     public void SpawnRandomChestOnClick()
     {

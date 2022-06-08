@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: 3 Epic
   m_EditorClassIdentifier: 
   ChestName: Epic Chest
+  ChestTypeName: Epic
   ChestSprite: {fileID: 21300000, guid: 74cebdf9bae90814890f458b35039f8a, type: 3}
   MinCoins: 600
   MaxCoins: 800
   MinGems: 45
   MaxGems: 60
-  UnlockTimer: 60
+  ChestPopUp_CoinValue: 600 ~ 800
+  ChestPopUp_GemValue: 45 ~ 60
+  UnlockTimer: 7

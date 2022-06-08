@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: 4 Legendary
   m_EditorClassIdentifier: 
   ChestName: Legendary Chest
+  ChestTypeName: Legendary
   ChestSprite: {fileID: 21300000, guid: ac4ca5a573b7d8e4eb2bf877de2bac59, type: 3}
   MinCoins: 1000
   MaxCoins: 1200
   MinGems: 80
   MaxGems: 100
-  UnlockTimer: 180
+  ChestPopUp_CoinValue: 1000 ~ 1200
+  ChestPopUp_GemValue: 80 ~ 100
+  UnlockTimer: 8

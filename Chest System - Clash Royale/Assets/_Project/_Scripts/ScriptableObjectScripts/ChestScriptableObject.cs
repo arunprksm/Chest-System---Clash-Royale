@@ -5,13 +5,13 @@ using UnityEngine;
 public class ChestScriptableObject : ScriptableObject
 {
     public string ChestName;
+    public string ChestTypeName;
     public Sprite ChestSprite;
     public int MinCoins;
     public int MaxCoins;
     public int MinGems;
     public int MaxGems;
+    public string ChestPopUp_CoinValue;
+    public string ChestPopUp_GemValue;
     public float UnlockTimer;
-    
-    //public float UnlockedTimer;
-    //public float LockTimer;
 }
